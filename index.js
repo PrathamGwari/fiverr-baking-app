@@ -5,11 +5,13 @@ var dal     = require('./dal.js');
 const e = require('express');
 const port = process.env.PORT || 8080;
 
+const router = express.Router()
+
 // commit first // 
 app.use(cors());
 
 // create user account
-app.get('/account/create/:name/:email/:password', function (req, res) {
+router.get('/account/create/:name/:email/:password', function (req, res) {
 
     // check if account exists
     dal.find(req.params.email).
@@ -34,7 +36,7 @@ app.get('/account/create/:name/:email/:password', function (req, res) {
 
 
 // login user 
-app.get('/account/login/:email/:password', function (req, res) {
+router.get('/account/login/:email/:password', function (req, res) {
 
     dal.find(req.params.email).
         then((user) => {
@@ -56,7 +58,7 @@ app.get('/account/login/:email/:password', function (req, res) {
 });
 
 // find user account
-app.get('/account/find/:email', function (req, res) {
+router.get('/account/find/:email', function (req, res) {
 
     dal.find(req.params.email).
         then((user) => {
@@ -66,7 +68,7 @@ app.get('/account/find/:email', function (req, res) {
 });
 
 // find one user by email - alternative to find
-app.get('/account/findOne/:email', function (req, res) {
+router.get('/account/findOne/:email', function (req, res) {
 
     dal.findOne(req.params.email).
         then((user) => {
@@ -77,7 +79,7 @@ app.get('/account/findOne/:email', function (req, res) {
 
 
 // update - deposit/withdraw amount
-app.get('/account/update/:email/:amount', function (req, res) {
+router.get('/account/update/:email/:amount', function (req, res) {
 
     var amount = Number(req.params.amount);
 
@@ -89,7 +91,7 @@ app.get('/account/update/:email/:amount', function (req, res) {
 });
 
 // all accounts
-app.get('/account/all', function (req, res) {
+router.get('/account/all', function (req, res) {
     console.log('inside accounts api')
     dal.all().
         then((docs) => {
@@ -98,6 +100,7 @@ app.get('/account/all', function (req, res) {
     });
 });
 
+app.use('/api', router)
 // used to serve static files from public directory
 app.use('/static', express.static('./build'));
 
