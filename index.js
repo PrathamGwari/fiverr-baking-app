@@ -8,7 +8,7 @@ const port = process.env.PORT || 8080;
 // commit first // 
 
 // used to serve static files from public directory
-app.use(express.static('./build'));
+// app.use(express.static('./build'));
 app.use(cors());
 
 // create user account
