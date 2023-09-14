@@ -3,7 +3,7 @@ var app     = express();
 var cors    = require('cors');
 var dal     = require('./dal.js');
 const e = require('express');
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 443;
 
 const router = express.Router()
 
@@ -104,4 +104,4 @@ app.use('/api', router)
 // used to serve static files from public directory
 app.use('/static', express.static('./build'));
 
-app.listen(process.env.PORT || 8080, () => console.log(`app running on port ${process.env.PORT || 8080}`));
+app.listen(process.env.PORT || 443, () => console.log(`app running on port ${process.env.PORT || 443}`));
