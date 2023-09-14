@@ -6,9 +6,6 @@ const e = require('express');
 const port = process.env.PORT || 8080;
 
 // commit first // 
-
-// used to serve static files from public directory
-app.use(express.static('./build'));
 app.use(cors());
 
 // create user account
@@ -100,5 +97,8 @@ app.get('/account/all', function (req, res) {
             res.send(docs);
     });
 });
+
+// used to serve static files from public directory
+app.use(express.static('./build'));
 
 app.listen(process.env.PORT || 8080, () => console.log(`app running on port ${process.env.PORT || 8080}`));
