@@ -93,7 +93,7 @@ app.get('/account/update/:email/:amount', function (req, res) {
 
 // all accounts
 app.get('/account/all', function (req, res) {
-
+    console.log('inside accounts api')
     dal.all().
         then((docs) => {
             console.log(docs);
