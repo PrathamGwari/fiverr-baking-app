@@ -4,15 +4,12 @@ var cors    = require('cors');
 var dal     = require('./dal.js');
 const e = require('express');
 
-const router = express.Router()
-
 // commit first // 
 app.use(cors());
 
-router.get('/', (req, res) => res.send('Working!!!'));
 
 // create user account
-router.get('/account/create/:name/:email/:password', function (req, res) {
+app.get('/account/create/:name/:email/:password', function (req, res) {
 
     // check if account exists
     dal.find(req.params.email).
@@ -37,7 +34,7 @@ router.get('/account/create/:name/:email/:password', function (req, res) {
 
 
 // login user 
-router.get('/account/login/:email/:password', function (req, res) {
+app.get('/account/login/:email/:password', function (req, res) {
     dal.find(req.params.email).
         then((user) => {
 
@@ -58,7 +55,7 @@ router.get('/account/login/:email/:password', function (req, res) {
 });
 
 // find user account
-router.get('/account/find/:email', function (req, res) {
+app.get('/account/find/:email', function (req, res) {
 
     dal.find(req.params.email).
         then((user) => {
@@ -68,7 +65,7 @@ router.get('/account/find/:email', function (req, res) {
 });
 
 // find one user by email - alternative to find
-router.get('/account/findOne/:email', function (req, res) {
+app.get('/account/findOne/:email', function (req, res) {
 
     dal.findOne(req.params.email).
         then((user) => {
@@ -79,7 +76,7 @@ router.get('/account/findOne/:email', function (req, res) {
 
 
 // update - deposit/withdraw amount
-router.get('/account/update/:email/:amount', function (req, res) {
+app.get('/account/update/:email/:amount', function (req, res) {
 
     var amount = Number(req.params.amount);
 
@@ -91,7 +88,7 @@ router.get('/account/update/:email/:amount', function (req, res) {
 });
 
 // all accounts
-router.get('/account/all', function (req, res) {
+app.get('/account/all', function (req, res) {
     console.log('inside accounts api')
     dal.all().
         then((docs) => {
@@ -100,7 +97,6 @@ router.get('/account/all', function (req, res) {
     });
 });
 
-app.use('/api', router)
 
 app.use(express.static('./build'))
 
