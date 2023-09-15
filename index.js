@@ -9,7 +9,7 @@ const router = express.Router()
 // commit first // 
 app.use(cors());
 
-app.get('/', (req, res) => res.send('Working!!!'));
+router.get('/', (req, res) => res.send('Working!!!'));
 
 // create user account
 router.get('/account/create/:name/:email/:password', function (req, res) {
