@@ -101,7 +101,7 @@ router.get('/account/all', function (req, res) {
 });
 
 app.use('/api', router)
-// used to serve static files from public directory
-// app.use('/static', express.static('./build'));
 
-app.listen(process.env.PORT, () => console.log(`app running on port ${process.env.PORT}`));
+app.use(express.static('./build'))
+
+app.listen(process.env.PORT || 8080, () => console.log(`app running on port ${process.env.PORT || 8080}`));
